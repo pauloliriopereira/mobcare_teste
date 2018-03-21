@@ -19,13 +19,13 @@
 						  value="com.mysql.jdbc.Driver"/>
 	
 	 			<property name="javax.persistence.jdbc.user"
-	 					  value="paulolirio"/>
+	 					  value="root"/>
 	
 				<property name="javax.persistence.jdbc.password"
 						  value="alphabeta"/>
 	
 				<property name="javax.persistence.jdbc.url"
-						  value="jdbc:mysql://localhost:3306/paulolirio_mobcare_bd"/>
+						  value="jdbc:mysql://192.168.15.2:3306/paulolirio_mobcare_bd"/>
 	 		</properties>
 	 </persistence-unit>
  </persistence>
