@@ -24,6 +24,16 @@ public class Colaborador
 	@JoinColumn ( name="colaborador_id" )
 	private Setor setor;
 	
+	public Setor getSetor() 
+	{
+		return setor;
+	}
+
+	public void setSetor( Setor setor ) 
+	{
+		this.setor = setor;
+	}
+
 	public String getCpf() 
 	{
 		return cpf;
