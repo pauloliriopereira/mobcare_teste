@@ -1,1 +1,5 @@
+#teste para buscar colaborador
 http://localhost:8080/buscar/30727280899/json
+
+#teste para remover
+http://localhost:8080/remover/30727280899	

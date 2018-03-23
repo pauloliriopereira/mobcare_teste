@@ -28,7 +28,7 @@ public class GeraTabelas
 	    EntityManager manager = factory.createEntityManager();
 	    manager.getTransaction().begin();
 	    
-	    for(Setor setor : setores ) 
+	    for( Setor setor : setores ) 
 	    {
 	    	manager.persist( setor );
 		}

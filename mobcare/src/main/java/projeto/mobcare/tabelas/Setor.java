@@ -22,7 +22,13 @@ public class Setor
 		this.descricao = descricao;
 	}
 	
-	public Long getId() {
+	public Long getId() 
+	{
 		return id;
+	}
+	
+	public void setId( long id ) 
+	{
+		this.id = id;
 	}
 }

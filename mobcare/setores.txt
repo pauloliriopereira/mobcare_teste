@@ -2,4 +2,4 @@ Recursos Humanos
 Financeiro
 Operações
 Jurídico
-Operações
+Desenvolvimento

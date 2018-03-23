@@ -1,25 +1,32 @@
 package projeto.mobcare.dao;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import projeto.mobcare.tabelas.Colaborador;
 
-public class ColaboradorDao implements Dao 
+public class ColaboradorDao implements Dao
 {
-	@Override
-	public Object buscar( String cpf ) 
+	public Object buscar( String cpf ) throws NoResultException
 	{
 		EntityManager manager = GerenciadorDePersistencia.getEntityManager();
 		Query query = manager.createNamedQuery( "Colaborador.buscaPorCpf" ) ;
 		query.setParameter( "cpf", cpf );
-		Colaborador colaborador = ( Colaborador ) query.getSingleResult();
-		manager.close();
+		Colaborador colaborador = null;
+		
+		try 
+		{
+			colaborador = ( Colaborador ) query.getSingleResult();
+		} 
+		catch ( NoResultException e ) 
+		{
+			throw new NoResultException( "Colaborador não entrado." );
+		}
 		return colaborador;
 	}
 
-	@Override
-	public void inserir( Object objeto ) 
+	public void inserir( Object objeto )
 	{
 		EntityManager manager = GerenciadorDePersistencia.getEntityManager();
 		manager.getTransaction().begin();
@@ -27,16 +34,25 @@ public class ColaboradorDao implements Dao
 		
 		manager.persist( colaborador.getSetor() );
 		manager.persist( colaborador );
-		manager.close();
+		manager.getTransaction().commit();
 	}
 
-	@Override
-	public void remover( String cpf ) 
+	public void remover( String cpf )
 	{
-		Colaborador colaborador = ( Colaborador ) buscar( cpf );
+		Colaborador colaborador = null; 
+		
+		try 
+		{
+			colaborador = ( Colaborador ) buscar( cpf );
+		} 
+		catch ( NoResultException e ) 
+		{
+			throw new NoResultException( "Colaborador não entrado." );
+		}
+		
 		EntityManager manager = GerenciadorDePersistencia.getEntityManager();
 		manager.getTransaction().begin();
 		manager.remove( colaborador );
-		manager.close();
+		manager.getTransaction().commit();
 	}
 }

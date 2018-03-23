@@ -17,5 +17,8 @@ public class GerenciadorDePersistencia
 		return factory.createEntityManager();
 	}
 	
-	
+	public static void fechar() 
+	{
+		factory.close();
+	}
 }
