@@ -20,11 +20,18 @@ public class GeraTabelas
 {	
 	public static void main( String[] args ) throws IOException 
 	{
-	    Set<Colaborador> colaboradores = geraListaDeColaboradores( "colaboradores.txt" );
+		List<Setor> setores = geraListaDeSetores( "setores.txt" );
+	    Set<Colaborador> colaboradores = geraListaDeColaboradores( "colaboradores.txt", setores );
+	    
 	    EntityManagerFactory factory = Persistence.createEntityManagerFactory( "paulolirio_mobcare_pu" );
 	    
 	    EntityManager manager = factory.createEntityManager();
 	    manager.getTransaction().begin();
+	    
+	    for(Setor setor : setores ) 
+	    {
+	    	manager.persist( setor );
+		}
 	    
 	    for( Colaborador colaborador : colaboradores ) 
 	    {
@@ -40,9 +47,9 @@ public class GeraTabelas
 	{
 		Scanner entrada = new Scanner( new FileInputStream( "setores.txt" ), "utf-8" );
 		List<Setor> setores = new ArrayList<Setor>();
-		Setor setor = new Setor();
 		while( entrada.hasNext() ) 
 		{
+			Setor setor = new Setor();
 			setor.setDescricao( entrada.nextLine() );
 			setores.add( setor );
 		}
@@ -50,14 +57,13 @@ public class GeraTabelas
 		return setores;
 	}
 	
-	private static Set<Colaborador> geraListaDeColaboradores( String nomeDoArquivo ) throws FileNotFoundException
+	private static Set<Colaborador> geraListaDeColaboradores( String nomeDoArquivo, List<Setor> setores ) throws FileNotFoundException
 	{
 		Scanner entrada = new Scanner( new FileInputStream( nomeDoArquivo ), "utf-8" ).useDelimiter( ";" );
 		Set<Colaborador> colaboradores = new HashSet<Colaborador>();
-		List<Setor> setores = geraListaDeSetores( "setores.txt" );
 		int contador = 0;
 		int index = 0;
-		while( !entrada.hasNext() ) 
+		while( entrada.hasNextLine() ) 
 		{
 			Colaborador colaborador = new Colaborador();
 			colaborador.setCpf( entrada.next() );
@@ -71,6 +77,7 @@ public class GeraTabelas
 			}
 			contador++;
 			colaboradores.add( colaborador );
+			entrada.nextLine();
 		}
 		entrada.close();
 		

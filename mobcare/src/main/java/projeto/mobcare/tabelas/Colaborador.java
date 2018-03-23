@@ -5,11 +5,16 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @XmlRootElement
+@NamedQueries({
+	@NamedQuery( name="Colaborador.buscaPorCpf", query="select c from Colaborador c where c.cpf = :cpf" )
+})
 public class Colaborador 
 {
 	@Id
@@ -20,7 +25,7 @@ public class Colaborador
 	private String telefone; 
 	private String email;
 	
-	@OneToOne( fetch=FetchType.LAZY )
+	@OneToOne( fetch=FetchType.EAGER )
 	@JoinColumn ( name="colaborador_id" )
 	private Setor setor;
 	
