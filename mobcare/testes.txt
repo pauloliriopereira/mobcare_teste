@@ -1,5 +1,58 @@
 #teste para buscar colaborador
-http://localhost:8080/buscar/30727280899/json
+http://localhost:8080/colaborador/buscar/30727280899/json
+
+#teste para buscar colaborador que não exite
+http://localhost:8080/colaborador/buscar/307272808/json
 
 #teste para remover
-http://localhost:8080/remover/30727280899	
+http://localhost:8080/colaborador/remover/30727280899
+
+#teste para remover registro que não exite
+http://localhost:8080/colaborador/remover/307272808
+
+#teste para inserir
+http://localhost:8080/colaborador/inserir/json
+{
+	"id":"",
+	"cpf":"10851656714",
+	"nome":"PAULO LÍRIO DE OLIVEIRA PEREIRA",
+	"telefone":"991435927",
+	"email":"pauloliriopereira@gmail.com",
+	"setor":{"id":2,"descricao":"Financeiro"}
+}
+
+#teste para inserir registro que já existente
+http://localhost:8080/colaborador/inserir/json
+{
+	"id":"",
+	"cpf":"10851656714",
+	"nome":"PAULO LÍRIO DE OLIVEIRA PEREIRA",
+	"telefone":"991435927",
+	"email":"pauloliriopereira@gmail.com",
+	"setor":{"id":2,"descricao":"Financeiro"}
+}
+
+#teste para inserir registro sem cpf
+http://localhost:8080/colaborador/inserir/json
+{
+	"id":"",
+	"cpf":"",
+	"nome":"PAULO LÍRIO DE OLIVEIRA PEREIRA",
+	"telefone":"991435927",
+	"email":"pauloliriopereira@gmail.com",
+	"setor":{"id":2,"descricao":"Financeiro"}
+}
+
+#teste para inserir registro sem setor
+http://localhost:8080/colaborador/inserir/json
+{
+	"id":"",
+	"cpf":"",
+	"nome":"PAULO LÍRIO DE OLIVEIRA PEREIRA",
+	"telefone":"991435927",
+	"email":"pauloliriopereira@gmail.com",
+	"setor":{"id":"","descricao":""}
+}
+
+#teste para listar colaboradores por setor
+http://localhost:8080/colaborador/listarPorDepartamento/json

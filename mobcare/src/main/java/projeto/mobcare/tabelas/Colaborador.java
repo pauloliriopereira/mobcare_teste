@@ -1,31 +1,36 @@
 package projeto.mobcare.tabelas;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
+@Table( name="colaborador" )
 @XmlRootElement
 @NamedQueries({
-	@NamedQuery( name="Colaborador.buscaPorCpf", query="select c from Colaborador c where c.cpf = :cpf" )
+	@NamedQuery( name="colaborador.buscaPorCpf", 
+			     query="select c from Colaborador c where c.cpf = :cpf" )
 })
 public class Colaborador 
 {
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	@Column( length=11, nullable=false, unique=true )
 	private String cpf;
 	private String nome;
 	private String telefone; 
 	private String email;
 	
-	@OneToOne( fetch=FetchType.EAGER )
+	@OneToOne
 	@JoinColumn ( name="colaborador_id" )
 	private Setor setor;
 	
